@@ -179,22 +179,21 @@ a.badge:hover { color: var(--text); border-color: var(--violet); }
 }
 
 /*
-  Blog index: results sit beside a sticky filter sidebar on wide screens,
-  so the list is in view while filtering. On narrow screens they stack.
+  Blog and projects indexes: results sit beside a sticky filter sidebar on
+  wide screens, so the list is in view while filtering. On narrow screens they stack.
 */
 .page-head.compact { padding-top: clamp(32px, 5vw, 56px); }
 
-.blog-layout { display: grid; gap: 24px; margin-top: 28px; }
+.index-layout { display: grid; gap: 24px; margin-top: 28px; }
 
 @media (min-width: 960px) {
-  .blog-layout { grid-template-columns: 300px minmax(0, 1fr); gap: 40px; align-items: start; }
-  .blog-layout .filters { position: sticky; top: 88px; }
-  .blog-layout .filter-row { grid-template-columns: 1fr; }
+  .index-layout { grid-template-columns: 300px minmax(0, 1fr); gap: 40px; align-items: start; }
+  .index-layout .filters { position: sticky; top: 88px; }
+  .index-layout .filter-row { grid-template-columns: 1fr; }
 }
 
 /* filters: one frame, a --flag key per row, dashed rules between rows */
 .filters { margin: 0; padding-bottom: 0; }
-.filters-inline { margin: 28px 0 20px; }
 
 .filter-row {
   display: grid;
