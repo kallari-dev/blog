@@ -1,5 +1,5 @@
 {% assign p = include.project %}{% assign type = site.data.project_types[p.category] %}
-<li class="project-item" data-category="{{ p.category }}" data-title="{{ p.title | downcase | escape }}">
+<li class="project-item" data-category="{{ p.category }}" data-tags="{{ p.tags | join: ',' | downcase }}" data-title="{{ p.title | downcase | escape }}">
   <a class="project-card" href="{{ p.url | relative_url }}">
     {% if p.cover %}
     <span class="cover">{% include cover.html src=p.cover %}</span>

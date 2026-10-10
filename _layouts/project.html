@@ -23,7 +23,7 @@ layout: default
       </dl>
       {% if page.tags.size > 0 %}
       <ul class="badges" aria-label="Tags">
-        {% for tag in page.tags %}<li><span class="badge">#{{ tag }}</span></li>{% endfor %}
+        {% for tag in page.tags %}<li><a class="badge" href="{{ '/projects/' | relative_url }}?tag={{ tag | downcase | uri_escape }}">#{{ tag }}</a></li>{% endfor %}
       </ul>
       {% endif %}
     </aside>

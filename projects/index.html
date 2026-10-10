@@ -35,6 +35,18 @@ scripts:
           {% endfor %}
         </div>
       </div>
+
+      {% assign tags = projects | map: 'tags' | join: ',' | downcase | split: ',' | uniq | sort %}
+      {% if tags.size > 0 %}
+      <div class="filter-row">
+        <span class="filter-key" aria-hidden="true">--tag</span>
+        <div class="chips" role="group" aria-label="Filter by tag">
+          {% for tag in tags %}
+          <button type="button" class="chip chip-tag" data-tag="{{ tag }}" aria-pressed="false">{{ tag }}</button>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
     </div>
 
     <div class="results">
