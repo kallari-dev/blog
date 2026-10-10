@@ -35,6 +35,7 @@ tags: [web, python]
 Optional, only shown when present:
 
 ```yaml
+published: false      # draft: kept out of the site until removed or set to true
 toc: false            # hide the table of contents (on by default, built from ## headings)
 status: closed        # projects: closed | active
 method: Grey box      # projects: shown in the header and on the card
@@ -69,6 +70,15 @@ Everything else is plain Markdown in the body: use any headings and sections you
   ```
 
 - Don't repeat the title as a `# heading`: the page shows it from the property. Links to other notes (`[[note]]`) aren't converted, so link to published pages with normal Markdown links.
+
+### Workflow in Obsidian
+
+1. New note in `_articles/` or `_projects/`; the file name becomes the URL (`my-post.md` → `/blog/my-post/`).
+2. Insert the `article` or `project` template from `_templates/`. It fills today's date and starts as a draft (`published: false`): drafts stay in the repo but never appear on the site.
+3. Write, then set `published` to true (or delete the line) when it's ready.
+4. Commit and push with Obsidian Git. GitHub Pages rebuilds the site in about a minute.
+
+Two local git hooks keep the timezone out of the history: `post-commit` rewrites each commit's dates to UTC, and `pre-push` refuses commits that still carry a local offset. They live in `.git/hooks/`, so a fresh clone needs them copied back.
 
 Never name clients, employers, people or systems.
 
