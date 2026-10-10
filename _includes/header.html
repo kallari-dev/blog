@@ -1,0 +1,16 @@
+{% assign parts = page.url | remove: '.html' | split: '/' %}{% assign seg = parts[1] %}
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <span class="brand-mark">{{ site.title }}</span>
+      <span class="path" aria-hidden="true">► ~{% if seg %}/{{ seg }}{% endif %}</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' %} aria-current="page"{% endif %}>Blog</a>
+      <a href="{{ '/projects/' | relative_url }}"{% if page.url contains '/projects/' %} aria-current="page"{% endif %}>Projects</a>
+      <a href="{{ '/portfolio/' | relative_url }}"{% if page.url contains '/portfolio/' %} aria-current="page"{% endif %}>Portfolio</a>
+      <a href="{{ '/about/' | relative_url }}"{% if page.url contains '/about/' %} aria-current="page"{% endif %}>About</a>
+    </nav>
+  </div>
+</header>

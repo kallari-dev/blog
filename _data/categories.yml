@@ -1,0 +1,10 @@
+# Blog categories. The key goes in a post's front matter as `category:`.
+writeup:
+  label: Writeups
+  single: Writeup
+guide:
+  label: Guides
+  single: Guide
+extra:
+  label: Extra
+  single: Extra

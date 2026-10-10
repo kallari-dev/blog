@@ -1,0 +1,53 @@
+/*
+  Motion runs only when the user has not asked for reduced motion.
+  Entrances have no delay and no fill-mode, so content stays visible if an
+  animation never runs. The typed headline is the one exception: its letters
+  use a backwards fill to stay hidden until their turn. With reduced motion
+  none of this applies, so every letter and the cursor show at once.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  .vanish { animation: boot 320ms steps(4); }
+  .vanish-2 { animation: boot 480ms steps(4); }
+  .vanish-3 { animation: boot 640ms steps(4); }
+
+  .cursor { animation: blink 1.06s steps(1) infinite; }
+
+  .type > span {
+    animation: type-in 1ms backwards;
+    animation-delay: calc(200ms + var(--i) * 45ms);
+  }
+
+  .hero h1 .cursor {
+    animation: type-in 1ms backwards, blink 1.06s steps(1) infinite;
+    animation-delay: calc(200ms + var(--n) * 45ms);
+  }
+
+  html { scroll-behavior: smooth; }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .glitch:hover,
+  .brand:hover .brand-mark { animation: glitch 240ms steps(1); }
+}
+
+@keyframes boot {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes type-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* a light flicker: 1px sideways jitter with a faint grey ghost, no slicing */
+@keyframes glitch {
+  0% { transform: translateX(1px); text-shadow: -1px 0 var(--line-strong); }
+  33% { transform: translateX(-1px); text-shadow: 1px 0 var(--line-strong); }
+  66% { transform: none; text-shadow: -1px 0 var(--line-strong); }
+  100% { transform: none; text-shadow: none; }
+}

@@ -1,0 +1,22 @@
+{% assign p = include.project %}{% assign slot = site.data.art[p.cover] %}{% assign type = site.data.project_types[p.type] %}
+<li class="project-item" data-category="{{ p.type }}" data-title="{{ p.title | downcase | escape }}">
+  <a class="project-card" href="{{ p.url | relative_url }}">
+    {% if slot and slot.src %}
+    <span class="cover">{% include art.html key=p.cover %}</span>
+    {% else %}
+    <div class="cover ring-cover" style="--o: {{ p.order | default: 0 }}" aria-hidden="true">{% include ascii/rings.html %}<span class="cover-tag label">{{ p.target_label | default: type.single }}</span></div>
+    {% endif %}
+    <div class="project-body">
+      <span class="card-meta label">
+        <span>{{ type.single | default: p.type }}</span>
+        {% if p.status %}<span class="status{% if p.status == 'closed' %} closed{% endif %}">{{ p.status }}</span>{% endif %}
+      </span>
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.description }}</p>
+      <div class="badges">
+        {% if p.method or p.stack %}<span class="badge">{{ p.method | default: p.stack }}</span>{% endif %}
+        {% if p.sample %}<span class="badge sample">Sample entry</span>{% endif %}
+      </div>
+    </div>
+  </a>
+</li>

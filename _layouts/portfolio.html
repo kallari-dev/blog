@@ -1,0 +1,62 @@
+---
+layout: default
+---
+{% assign profile = site.data.profile %}{% assign op = profile.operator %}
+<div class="wrap">
+  <header class="page-head compact vanish">
+    <h1 class="hack glitch">{{ page.title }}</h1>
+  </header>
+
+  <section class="operator frame vanish-2" aria-labelledby="operator-title">
+    <span class="label frame-label" id="operator-title">Operator</span>
+    <div class="avatar" aria-hidden="true">{% include ascii/avatar.html %}</div>
+    <div class="operator-info">
+      <dl class="dossier readout">
+        <div><dt class="label">Handle</dt><dd>{{ site.author.name }}</dd></div>
+        <div><dt class="label">Class</dt><dd>{{ op.class }}</dd></div>
+        <div><dt class="label">Projects</dt><dd>{{ site.projects.size }}</dd></div>
+        <div><dt class="label">Status</dt><dd class="status-live">{{ op.status }}</dd></div>
+      </dl>
+      <div class="prose operator-bio">
+        {{ content }}
+      </div>
+      <div class="actions operator-actions">
+        <a class="btn" href="{{ site.github_url }}" rel="me">GitHub &#8599;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section skill-tree" aria-labelledby="tree-title">
+    <div class="section-head">
+      <h2 class="hack glitch" id="tree-title">Skill tree</h2>
+      {% if op.sample_levels %}<span class="badge sample">Sample levels</span>{% endif %}
+    </div>
+    <ol class="branches">
+      {% for b in profile.tree %}
+      <li class="branch">
+        <div class="branch-head">
+          <h3>{{ b.branch }}</h3>
+          <span class="label lv">LV {{ b.level }}</span>
+          <span class="meter" role="img" aria-label="Level {{ b.level }} of 10">{% for i in (1..10) %}<i{% if i <= b.level %} class="on"{% endif %}></i>{% endfor %}</span>
+        </div>
+        <ul class="nodes">
+          {% for n in b.nodes %}<li class="node{% if n.state == 'progress' %} progress{% endif %}">{{ n.name }}{% if n.state == 'progress' %}<span class="sr-only"> (in progress)</span>{% endif %}</li>{% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ol>
+    <p class="fine legend"><span>■ unlocked</span><span>□ in progress</span></p>
+  </section>
+
+  <section class="section" aria-labelledby="projects-title">
+    <div class="section-head">
+      <h2 class="hack glitch" id="projects-title">Selected projects</h2>
+      <a class="more" href="{{ '/projects/' | relative_url }}">All projects &rarr;</a>
+    </div>
+    {% assign featured = site.projects | where: 'featured', true | sort: 'order' %}
+    <ul class="grid cards">
+      {% for p in featured limit: 3 %}{% include project-card.html project=p %}{% endfor %}
+    </ul>
+  </section>
+
+</div>

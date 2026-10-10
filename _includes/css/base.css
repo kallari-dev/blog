@@ -1,0 +1,123 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--void);
+  color: var(--text);
+  font: 400 16.5px/1.7 var(--term);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+main { flex: 1; }
+
+a {
+  color: var(--text);
+  text-decoration-color: var(--violet);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+@media (hover: hover) {
+  a:hover { color: var(--violet); }
+}
+
+img, svg { max-width: 100%; height: auto; }
+
+[hidden] { display: none !important; }
+
+::selection { background: var(--violet); color: var(--void); }
+
+:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--term);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text);
+  overflow-wrap: break-word;
+}
+
+/* Departure Mono is drawn on an 11px grid, so sizes step in multiples of 5.5px */
+h1 { font-size: 33px; color: var(--violet); }
+h2 { font-size: 22px; }
+h3 { font-size: 22px; }
+
+@media (min-width: 720px) {
+  h1 { font-size: 44px; }
+  h2 { font-size: 33px; }
+}
+
+/* Hacked headings stay at 33px so they never drop below 28px */
+h2.hack { font-size: 33px; }
+
+/* page titles in Hacked (blog, projects, portfolio, about) are copper from the start */
+.page-head h1.hack { color: var(--copper); }
+
+/* one weight, no italic: emphasis is brighter text */
+em { font-style: normal; color: #fff; }
+
+p { margin: 0 0 1em; }
+
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 10;
+  padding: 10px 14px;
+  background: var(--text);
+  color: var(--void);
+  font-family: var(--term);
+}
+
+.skip:focus { top: 12px; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* small label for metadata everywhere */
+.label {
+  font-family: var(--term);
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Hacked: special elements only, never below 28px */
+.hack {
+  font-family: var(--hack);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+/* copper block cursor */
+.cursor {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.8em;
+  margin-left: 0.12em;
+  vertical-align: -0.04em;
+  background: var(--copper);
+}
+
+/* 16px pixel icons */
+.px { display: inline-flex; flex: none; width: 16px; height: 16px; }
+.px svg { width: 16px; height: 16px; fill: currentColor; shape-rendering: crispEdges; }

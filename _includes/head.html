@@ -1,0 +1,12 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% comment %} Everything is served from this site: no third-party scripts, styles, fonts or requests. Inline style attributes only carry CSS variables. {% endcomment %}
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; font-src 'self'; img-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="same-origin">
+<meta name="theme-color" content="#0a0a0a">
+{% seo %}
+{% feed_meta %}
+<link rel="icon" href="{{ '/assets/art/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="preload" href="{{ '/assets/fonts/departure-mono.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ '/assets/fonts/hacked.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">

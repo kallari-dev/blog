@@ -1,0 +1,43 @@
+/* Recall tokens. Dark only. */
+
+/* Hacked by David Libeau, licensed CC BY. */
+@font-face {
+  font-family: "Hacked";
+  src: url("../fonts/hacked.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* Departure Mono by Helena Zhang, SIL Open Font License 1.1. */
+@font-face {
+  font-family: "Departure Mono";
+  src: url("../fonts/departure-mono.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+
+  --void: #0a0a0a;
+  --veil: #121212;
+  --shade: #1a1a1a;
+  --line: #2a2a2a;
+  --line-strong: #3a3a3a;
+
+  --text: #e8e8e8;
+  --muted: #a3a3a3;
+  --faint: #8c8c8c;
+
+  --violet: #a78bfa;
+  --copper: #d08a52;
+  --gold: #e3b169;
+  --crimson: #e0435a;
+
+  --hack: "Hacked", "Departure Mono", ui-monospace, monospace;
+  --term: "Departure Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --gutter: clamp(16px, 4vw, 40px);
+  --wide: 1120px;
+  --read: 70ch;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}

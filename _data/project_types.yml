@@ -1,0 +1,10 @@
+# Project types. The key goes in a project's front matter as `type:`.
+engagement:
+  label: Engagements
+  single: Engagement
+coding:
+  label: Coding
+  single: Coding
+research:
+  label: Research
+  single: Research

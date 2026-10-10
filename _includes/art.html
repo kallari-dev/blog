@@ -1,0 +1,5 @@
+{% comment %}
+  Renders an image slot from _data/art.yml. Outputs nothing while the slot is empty,
+  so the caller's abstract fallback shows instead.
+  Usage: {% include art.html key="hero" class="hero-art" eager=true %}
+{% endcomment %}{% assign slot = site.data.art[include.key] %}{% if slot and slot.src %}<figure class="art {{ include.class }}"><img src="{{ slot.src | relative_url }}" width="{{ slot.width }}" height="{{ slot.height }}" alt="{{ slot.alt | escape }}"{% unless include.eager %} loading="lazy"{% endunless %} decoding="async"></figure>{% endif %}

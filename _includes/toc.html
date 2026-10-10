@@ -1,0 +1,12 @@
+{% comment %}
+  Builds a table of contents from the h2 headings kramdown rendered into include.html.
+{% endcomment %}{% assign chunks = include.html | split: '<h2 id="' %}{% if chunks.size > 2 %}
+<nav class="toc frame" aria-label="On this page">
+  <span class="label frame-label">Contents</span>
+  <ol>
+    {% for chunk in chunks offset: 1 %}{% assign id = chunk | split: '"' | first %}{% assign heading = chunk | split: '</h2>' | first | remove_first: id | remove_first: '">' | strip_html %}
+    <li><a href="#{{ id }}">{{ heading }}</a></li>
+    {% endfor %}
+  </ol>
+</nav>
+{% endif %}

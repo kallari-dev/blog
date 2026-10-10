@@ -1,0 +1,47 @@
+# Image slots. Leave `src` empty and the page uses its fallback
+# (ASCII rings). Filled slots show in greyscale with a dot screen.
+# To fill a slot, put a WebP in assets/art/
+# and set `src`, then keep `width` and `height` matching the file.
+
+hero:
+  src:
+  width: 1600
+  height: 1000
+  alt: ""
+
+portfolio_banner:
+  src:
+  width: 1500
+  height: 500
+  alt: ""
+
+case_web:
+  src:
+  width: 1600
+  height: 900
+  alt: ""
+
+case_ad:
+  src:
+  width: 1600
+  height: 900
+  alt: ""
+
+case_mobile:
+  src:
+  width: 1600
+  height: 900
+  alt: ""
+
+case_ctf:
+  src:
+  width: 1600
+  height: 900
+  alt: ""
+
+# Social preview (1200x630 PNG or JPG). When filled, also set `image:` in _config.yml.
+og:
+  src:
+  width: 1200
+  height: 630
+  alt: ""

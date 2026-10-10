@@ -1,0 +1,14 @@
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+.bundle/
+vendor/
+.DS_Store
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+Gemfile.lock
+.claude/
+_references/
+docs/
+.superpowers/

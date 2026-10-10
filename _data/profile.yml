@@ -1,0 +1,44 @@
+# Portfolio profile. Anonymized: no names, employers, schools, places or dates of birth.
+
+# Operator readout and skill tree.
+# Levels (1-10) are placeholders while sample_levels is true; set real values, then set it to false.
+operator:
+  class: Offensive security
+  status: Active
+  sample_levels: true
+
+tree:
+  - branch: Penetration testing
+    level: 7
+    nodes:
+      - name: Web applications
+      - name: Mobile applications
+      - name: Networks
+      - name: Cloud
+      - name: Active Directory
+      - name: Pentester exam
+        state: progress
+  - branch: Capture the flag
+    level: 6
+    nodes:
+      - name: Reverse engineering
+      - name: Cryptography
+      - name: Web security
+      - name: Binary exploitation
+  - branch: Blue team
+    level: 4
+    nodes:
+      - name: Intrusion detection
+      - name: Endpoint monitoring
+      - name: SIEM
+  - branch: Programming
+    level: 6
+    nodes:
+      - name: Python
+      - name: C
+      - name: Java
+  - branch: Automation and virtualization
+    level: 4
+    nodes:
+      - name: Ansible
+      - name: Docker

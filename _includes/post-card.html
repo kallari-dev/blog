@@ -1,0 +1,11 @@
+{% assign p = include.post %}{% assign cat = site.data.categories[p.category] %}{% assign words = p.content | number_of_words %}{% assign minutes = words | divided_by: 200 | at_least: 1 %}{% if cat %}{% assign icon = p.category %}{% else %}{% assign icon = 'extra' %}{% endif %}
+<li class="post-card" data-category="{{ p.category }}" data-tags="{{ p.tags | join: ',' | downcase }}" data-title="{{ p.title | downcase | escape }}">
+  <a href="{{ p.url | relative_url }}">
+    <span class="px" aria-hidden="true">{% include icons/{{ icon }}.svg %}</span>
+    <span class="label meta"><b>{{ cat.single | default: p.category }}</b> · <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y-%m-%d" }}</time> · {{ minutes }} min</span>
+    <h3>{{ p.title }}</h3>
+    {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+    {% if p.tags.size > 0 %}<span class="label tags">{% for tag in p.tags limit: 4 %}<span>#{{ tag }}</span>{% endfor %}</span>{% endif %}
+    <span class="px arrow" aria-hidden="true">{% include icons/arrow.svg %}</span>
+  </a>
+</li>

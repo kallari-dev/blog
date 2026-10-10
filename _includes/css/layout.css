@@ -1,0 +1,192 @@
+.wrap {
+  width: min(var(--wide), 100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+/* header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: color-mix(in srgb, var(--void) 92%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 24px;
+  padding: 8px 0;
+}
+
+.brand {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  min-height: 44px;
+  padding: 6px 0;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brand-mark {
+  font-family: var(--hack);
+  font-size: 1.75rem;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.brand .path {
+  font-family: var(--term);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+}
+
+/* hovered titles turn copper */
+@media (hover: hover) {
+  .brand:hover { color: var(--copper); }
+  .glitch:hover { color: var(--copper); }
+}
+
+.nav { display: flex; gap: 4px 22px; }
+
+.nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--term);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 160ms var(--ease);
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  height: 1px;
+  background: var(--muted);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--ease);
+}
+
+.nav a[aria-current="page"] { color: var(--text); }
+.nav a[aria-current="page"]::before { content: "►"; margin-right: 6px; color: var(--copper); }
+.nav a[aria-current="page"]::after { transform: scaleX(1); }
+
+@media (hover: hover) {
+  .nav a:hover { color: var(--text); }
+  .nav a:hover::after { transform: scaleX(1); }
+}
+
+/* footer */
+.site-footer {
+  margin-top: clamp(64px, 10vw, 120px);
+  border-top: 1px solid var(--line);
+  padding: 20px 0 28px;
+}
+
+.site-footer .bar { padding: 0; gap: 8px 32px; }
+.site-footer p { margin: 0; }
+.site-footer nav { display: flex; gap: 20px; }
+
+.site-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .site-footer a:hover { color: var(--text); }
+}
+
+.fine {
+  font-family: var(--term);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+}
+
+/* sections */
+.section { padding: clamp(56px, 9vw, 104px) 0 0; }
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 28px;
+}
+
+.section-head .label { display: block; margin-bottom: 10px; }
+
+/* page heading used by blog, portfolio, about */
+.page-head { padding: clamp(48px, 8vw, 96px) 0 8px; }
+.page-head .label { display: block; margin-bottom: 14px; }
+
+.page-head .label::before,
+.section-head .label::before { content: "> "; color: var(--faint); }
+
+.lede {
+  max-width: 60ch;
+  margin: 18px 0 0;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 20px;
+}
+
+.page-body { margin-top: 32px; }
+
+/* framed block: label set into the top border, pixel corner ticks */
+.frame {
+  position: relative;
+  margin-top: 6px;
+  padding: 22px clamp(14px, 3vw, 24px) 6px;
+  border: 1px solid var(--line);
+}
+
+.frame::before,
+.frame::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+}
+
+.frame::before { top: -1px; left: -1px; border-top: 2px solid var(--muted); border-left: 2px solid var(--muted); }
+.frame::after { right: -1px; bottom: -1px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); }
+
+.frame-label {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  transform: translateY(-50%);
+  padding: 0 8px;
+  background: var(--void);
+  line-height: 1;
+}
+
+.frame > .grid { padding-bottom: clamp(14px, 3vw, 24px); }

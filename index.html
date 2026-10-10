@@ -1,0 +1,51 @@
+---
+layout: default
+description: "Offensive security writeups and guides, plus overviews of projects: engagements, coding and research."
+---
+{% assign hero = site.data.art.hero %}{% assign headline = site.tagline | append: '.' %}{% assign letters = headline | split: '' %}
+<section class="hero">
+  {% unless hero.src %}<div class="hero-rings" aria-hidden="true">{% include ascii/rings.html %}</div>{% endunless %}
+  <div class="wrap hero-grid{% if hero.src %} has-art{% endif %}">
+    <div>
+      <span class="label vanish">Offensive security · Kallari’s blog</span>
+      <h1 class="hack glitch" style="--n: {{ letters.size }}"><span class="sr-only">{{ headline }}</span><span class="type" aria-hidden="true">{% for ch in letters %}<span style="--i: {{ forloop.index0 }}">{{ ch }}</span>{% endfor %}</span><span class="cursor" aria-hidden="true"></span></h1>
+      <p class="lede vanish-2">Writeups and guides from penetration testing and CTFs, plus overviews of the projects behind them.</p>
+      <div class="actions vanish-3">
+        <a class="btn" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+        <a class="btn ghost" href="{{ '/projects/' | relative_url }}">See the projects</a>
+      </div>
+    </div>
+    {% include art.html key="hero" eager=true %}
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="section" aria-labelledby="latest-title">
+    <div class="section-head">
+      <h2 id="latest-title">From the blog</h2>
+      <a class="more" href="{{ '/blog/' | relative_url }}">All posts &rarr;</a>
+    </div>
+    <div class="frame">
+      <span class="label frame-label">Latest</span>
+      <ul class="posts">
+        {% for post in site.posts limit: 3 %}
+          {% include post-card.html post=post %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="projects-title">
+    <div class="section-head">
+      <h2 id="projects-title">Selected projects</h2>
+      <a class="more" href="{{ '/projects/' | relative_url }}">All projects &rarr;</a>
+    </div>
+    {% assign featured = site.projects | where: 'featured', true | sort: 'order' %}
+    <div class="frame">
+      <span class="label frame-label">Projects</span>
+      <ul class="grid cards">
+        {% for p in featured limit: 3 %}{% include project-card.html project=p %}{% endfor %}
+      </ul>
+    </div>
+  </section>
+</div>

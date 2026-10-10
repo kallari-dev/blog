@@ -1,0 +1,36 @@
+---
+layout: default
+title: Projects
+description: "Overviews of things I made: engagements, coding and research."
+scripts:
+  - /assets/js/filter.js
+---
+{% assign projects = site.projects | sort: 'order' %}
+<div class="wrap">
+  <header class="page-head compact vanish">
+    <span class="label">Projects</span>
+    <h1 class="hack glitch">Things I made</h1>
+    <p class="lede">{{ page.description }}</p>
+  </header>
+
+  <div class="filters filters-inline frame vanish-2">
+    <span class="label frame-label">Filter</span>
+    <div class="filter-row">
+      <span class="filter-key" aria-hidden="true">--type</span>
+      <div class="chips" role="group" aria-label="Filter by type">
+        <button type="button" class="chip" data-category="" aria-pressed="true">All</button>
+        {% for t in site.data.project_types %}
+        <button type="button" class="chip" data-category="{{ t[0] }}" aria-pressed="false">{{ t[1].label }}</button>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <p class="count label" id="count" data-noun="project" aria-live="polite">{{ projects.size }} {% if projects.size == 1 %}project{% else %}projects{% endif %} found</p>
+
+  <ul class="grid cards" id="filter-list">
+    {% for p in projects %}{% include project-card.html project=p %}{% endfor %}
+  </ul>
+
+  <p class="empty" id="empty" hidden>Nothing matches this filter.</p>
+</div>

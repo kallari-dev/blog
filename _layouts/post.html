@@ -1,0 +1,35 @@
+---
+layout: default
+---
+{% assign cat = site.data.categories[page.category] %}{% assign words = content | number_of_words %}{% assign minutes = words | divided_by: 200 | at_least: 1 %}
+<article class="entry wrap">
+  <header class="entry-head vanish">
+    <p class="label meta">
+      <a class="more" href="{{ '/blog/' | relative_url }}?category={{ page.category }}"><b>{{ cat.single | default: page.category }}</b></a>
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+      <span>{{ minutes }} min</span>
+    </p>
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
+    {% if page.tags.size > 0 %}
+    <ul class="badges" aria-label="Tags">
+      {% for tag in page.tags %}<li><a class="badge" href="{{ '/blog/' | relative_url }}?tag={{ tag | downcase | uri_escape }}">#{{ tag }}</a></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  <div class="entry-body vanish-2">
+    <div class="prose">
+      {{ content }}
+    </div>
+    {% if page.toc %}{% include toc.html html=content %}{% endif %}
+  </div>
+
+  {% if page.previous or page.next %}
+  <nav class="pager" aria-label="More posts">
+    {% if page.previous %}<a class="prev" href="{{ page.previous.url | relative_url }}"><span class="label">&larr; Older</span>{{ page.previous.title }}</a>{% endif %}
+    {% if page.next %}<a class="next" href="{{ page.next.url | relative_url }}"><span class="label">Newer &rarr;</span>{{ page.next.title }}</a>{% endif %}
+  </nav>
+  {% endif %}
+</article>
+<script src="{{ '/assets/js/code.js' | relative_url }}" defer></script>

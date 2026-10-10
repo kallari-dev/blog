@@ -1,0 +1,184 @@
+/* home hero */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(56px, 9vw, 112px) 0 clamp(48px, 7vw, 88px);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-grid { display: grid; gap: 48px; align-items: center; }
+.hero-grid > div { max-width: 760px; }
+.hero-grid.has-art { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
+
+.hero .label { display: block; margin-bottom: 22px; }
+.hero h1 { font-size: clamp(2.5rem, 7vw, 5rem); line-height: 1; }
+.hero .lede { margin: 26px 0 34px; }
+
+@media (max-width: 820px) {
+  .hero-grid.has-art { grid-template-columns: 1fr; gap: 24px; }
+  .hero .art { order: -1; max-width: 360px; margin-inline: auto; }
+}
+
+/* portfolio */
+.banner {
+  position: relative;
+  margin-top: 40px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+/* project page header: key ........ value */
+.dossier { display: grid; gap: 6px; max-width: 560px; margin: 28px 0 0; }
+.dossier div { display: flex; align-items: baseline; gap: 10px; }
+.dossier div::before { content: ""; order: 1; flex: 1; min-width: 24px; border-bottom: 1px dotted var(--line-strong); }
+.dossier dt { order: 0; flex: none; }
+.dossier dd { order: 2; margin: 0; text-align: right; }
+
+.project-cover { margin: 40px 0 0; border: 1px solid var(--line); }
+
+.prose .findings { display: grid; gap: 10px; padding: 0; list-style: none; }
+
+.findings li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: baseline;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  background: var(--veil);
+}
+
+.findings .badge { justify-content: center; min-width: 76px; }
+
+/* 404 */
+.vanished { padding: clamp(80px, 14vw, 160px) 0 0; text-align: center; }
+.vanished h1 { font-size: clamp(5rem, 22vw, 11rem); line-height: 0.9; }
+.vanished .signal { margin: 18px 0 8px; font-family: var(--term); font-size: 22px; color: var(--text); }
+.vanished .lede { margin-inline: auto; }
+.vanished .actions { justify-content: center; margin-top: 32px; }
+
+/* portfolio: ASCII avatar beside the operator readout */
+.avatar { justify-self: center; overflow: hidden; }
+
+.avatar-art {
+  margin: 0;
+  font-family: var(--term);
+  font-size: 6px;
+  line-height: 1;
+  white-space: pre;
+  user-select: none;
+}
+
+/* colours come from _includes/css/avatar.css */
+@media (max-width: 480px) {
+  .avatar-art { font-size: 4px; }
+}
+
+/* operator readout and skill tree */
+.operator {
+  display: grid;
+  gap: 24px 40px;
+  align-items: center;
+  margin-top: 28px;
+  padding-bottom: 24px;
+}
+
+@media (min-width: 820px) {
+  .operator { grid-template-columns: auto minmax(0, 1fr); }
+}
+
+.operator-bio { margin-top: 22px; }
+.operator-actions { justify-content: flex-end; margin-top: 22px; }
+
+.readout { max-width: none; margin: 0; }
+.status-live::before { content: "■ "; color: var(--copper); }
+
+.skill-tree .section-head { align-items: center; }
+
+.branches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.branch { padding: 18px 20px 20px; border: 1px solid var(--line); background: var(--veil); }
+
+.branch-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+
+.branch h3 { font-size: 16.5px; color: var(--violet); }
+.branch .lv { color: var(--text); }
+
+/* level meter: ten pixel segments */
+.meter { grid-column: 1 / -1; display: flex; gap: 3px; }
+.meter i { flex: 1; height: 8px; background: var(--line); }
+.meter i.on { background: var(--copper); }
+
+/* nodes hang off a vertical line, one short connector each */
+.nodes { margin: 16px 0 0; padding: 0 0 0 10px; list-style: none; border-left: 1px solid var(--line-strong); }
+.node { position: relative; padding: 3px 0 3px 22px; color: var(--muted); }
+.node::before { content: ""; position: absolute; left: -10px; top: 50%; width: 10px; border-top: 1px solid var(--line-strong); }
+.node::after { content: "■"; position: absolute; left: 4px; top: 3px; color: var(--text); }
+.node.progress { color: var(--faint); }
+.node.progress::after { content: "□"; color: var(--faint); }
+
+.legend { display: flex; gap: 16px; margin: 14px 0 0; }
+
+/*
+  ASCII dither rings. Provisional: to drop them, empty _includes/ascii/rings.html
+  and delete this block.
+*/
+.rings {
+  margin: 0;
+  font-family: var(--term);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: pre;
+  color: #4d4d4d;
+  user-select: none;
+  pointer-events: none;
+}
+
+.rings .cu { color: var(--copper); opacity: 0.7; }
+
+.hero-rings {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: max(-6vw, -80px);
+  transform: translateY(-50%);
+  opacity: 0.85;
+}
+
+@media (max-width: 820px) {
+  .hero-rings { right: 50%; transform: translate(50%, -50%); opacity: 0.35; }
+  .hero-rings .rings { font-size: 8px; }
+}
+
+/* strips and covers crop the middle of the rings */
+.ring-strip,
+.ring-cover { position: relative; overflow: hidden; }
+
+.ring-strip { height: 132px; border: 1px solid var(--line); }
+
+.ring-strip .rings,
+.ring-cover .rings { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+.vanished .ring-strip { margin-top: clamp(48px, 8vw, 80px); }
+
+.project-card .ring-cover { aspect-ratio: 5 / 2; }
+
+/* each case card shows a different part of the rings */
+.ring-cover .rings {
+  font-size: 7px;
+  transform: translate(calc(-50% + var(--o, 0) * -23px), calc(-50% + var(--o, 0) * 9px));
+}

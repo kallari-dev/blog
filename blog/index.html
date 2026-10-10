@@ -1,0 +1,63 @@
+---
+layout: default
+title: Blog
+description: Writeups, guides, projects and the occasional extra.
+scripts:
+  - /assets/js/filter.js
+---
+<div class="wrap">
+  <header class="page-head compact vanish">
+    <span class="label">The blog</span>
+    <h1 class="hack glitch">Field notes</h1>
+    <p class="lede">{{ page.description }}</p>
+  </header>
+
+  <div class="blog-layout">
+    <div class="filters frame vanish-2">
+      <span class="label frame-label">Filter</span>
+
+      <div class="filter-row">
+        <span class="filter-key" aria-hidden="true">--search</span>
+        <label class="search">
+          <span class="prompt-sign" aria-hidden="true">&gt;</span>
+          <span class="sr-only">Search titles</span>
+          <input type="search" id="filter-search" placeholder="search titles" autocomplete="off">
+        </label>
+      </div>
+
+      <div class="filter-row">
+        <span class="filter-key" aria-hidden="true">--category</span>
+        <div class="chips" role="group" aria-label="Filter by category">
+          <button type="button" class="chip" data-category="" aria-pressed="true">All</button>
+          {% for c in site.data.categories %}
+          <button type="button" class="chip" data-category="{{ c[0] }}" aria-pressed="false">{{ c[1].label }}</button>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% assign tags = site.posts | map: 'tags' | join: ',' | downcase | split: ',' | uniq | sort %}
+      {% if tags.size > 0 %}
+      <div class="filter-row">
+        <span class="filter-key" aria-hidden="true">--tag</span>
+        <div class="chips" role="group" aria-label="Filter by tag">
+          {% for tag in tags %}
+          <button type="button" class="chip chip-tag" data-tag="{{ tag }}" aria-pressed="false">{{ tag }}</button>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="results">
+      <p class="count label" id="count" data-noun="post" aria-live="polite">{{ site.posts.size }} {% if site.posts.size == 1 %}post{% else %}posts{% endif %} found</p>
+
+      <ul class="posts ruled" id="filter-list">
+        {% for post in site.posts %}
+          {% include post-card.html post=post %}
+        {% endfor %}
+      </ul>
+
+      <p class="empty" id="empty" hidden>Nothing matches these filters.</p>
+    </div>
+  </div>
+</div>
