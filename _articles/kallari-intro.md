@@ -5,7 +5,7 @@ date: 2026-10-10
 category: extra
 tags:
   - commentary
-cover: shadow_walk.png
+cover:
 published: true
 ---
 
