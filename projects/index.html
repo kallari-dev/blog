@@ -5,7 +5,7 @@ description: "Overviews of things I made: engagements, coding and research."
 scripts:
   - /assets/js/filter.js
 ---
-{% assign projects = site.projects | sort: 'order' %}
+{% assign projects = site.projects | sort: 'date' | reverse %}
 <div class="wrap">
   <header class="page-head compact vanish">
     <span class="label">Projects</span>
@@ -41,7 +41,7 @@ scripts:
       <p class="count label" id="count" data-noun="project" aria-live="polite">{{ projects.size }} {% if projects.size == 1 %}project{% else %}projects{% endif %} found</p>
 
       <ul class="grid cards" id="filter-list">
-        {% for p in projects %}{% include project-card.html project=p %}{% endfor %}
+        {% for p in projects %}{% include project-card.html project=p index=forloop.index %}{% endfor %}
       </ul>
 
       <p class="empty" id="empty" hidden>Nothing matches these filters.</p>

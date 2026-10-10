@@ -28,7 +28,7 @@ description: "Offensive security writeups and guides, plus overviews of projects
     <div class="frame">
       <span class="label frame-label">Latest</span>
       <ul class="posts">
-        {% for post in site.posts limit: 3 %}
+        {% assign articles = site.articles | sort: 'date' | reverse %}{% for post in articles limit: 3 %}
           {% include post-card.html post=post %}
         {% endfor %}
       </ul>
@@ -40,11 +40,11 @@ description: "Offensive security writeups and guides, plus overviews of projects
       <h2 id="projects-title">Selected projects</h2>
       <a class="more" href="{{ '/projects/' | relative_url }}">All projects &rarr;</a>
     </div>
-    {% assign featured = site.projects | where: 'featured', true | sort: 'order' %}
+    {% assign featured = site.projects | where: 'featured', true | sort: 'date' | reverse %}
     <div class="frame">
       <span class="label frame-label">Projects</span>
       <ul class="grid cards">
-        {% for p in featured limit: 3 %}{% include project-card.html project=p %}{% endfor %}
+        {% for p in featured limit: 3 %}{% include project-card.html project=p index=forloop.index %}{% endfor %}
       </ul>
     </div>
   </section>

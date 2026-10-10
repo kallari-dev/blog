@@ -1,0 +1,56 @@
+{%- comment -%}
+  Makes images in rendered post HTML load from the site:
+  - Obsidian embeds: ![[shot.png]], ![[shot.png|400]] (width), ![[shot.png|400x300]], ![[shot.png|alt text]]
+  - Markdown images with relative paths: ![alt](Assets/shot.png)
+  Both resolve by file name through image-src.html. Other ![[embeds]] show their name as text.
+  Usage: {% include images.html html=content %}
+{%- endcomment -%}
+{%- capture nl %}
+{% endcapture -%}
+{%- assign image_exts = 'png,jpg,jpeg,gif,webp,avif,svg' | split: ',' -%}
+
+{%- comment -%} kramdown reads the | in ![[shot.png|400]] as a one-row table: undo that {%- endcomment -%}
+{%- assign table_open = '<table>' | append: nl | append: '  <tbody>' | append: nl | append: '    <tr>' | append: nl | append: '      <td>![[' -%}
+{%- assign cell_sep = '</td>' | append: nl | append: '      <td>' -%}
+{%- assign table_close = ']]</td>' | append: nl | append: '    </tr>' | append: nl | append: '  </tbody>' | append: nl | append: '</table>' -%}
+{%- assign html = include.html | replace: table_open, '<p>![[' -%}
+{%- assign chunks = html | split: '<p>![[' -%}
+{%- capture html -%}{%- for chunk in chunks -%}{%- if forloop.first -%}{{ chunk }}{%- continue -%}{%- endif -%}
+{%- assign head = chunk | split: ']]' | first -%}
+{%- assign fixed = chunk -%}
+{%- if head contains '</td>' -%}{%- assign fixed = chunk | replace_first: cell_sep, '|' | replace_first: table_close, ']]</p>' -%}{%- endif -%}
+<p>![[{{ fixed }}
+{%- endfor -%}{%- endcapture -%}
+
+{%- comment -%} Obsidian embeds {%- endcomment -%}
+{%- assign chunks = html | split: '![[' -%}
+{%- capture html -%}{%- for chunk in chunks -%}{%- if forloop.first -%}{{ chunk }}{%- continue -%}{%- endif -%}
+{%- unless chunk contains ']]' -%}![[{{ chunk }}{%- continue -%}{%- endunless -%}
+{%- assign inner = chunk | split: ']]' | first -%}
+{%- assign close = inner | append: ']]' -%}
+{%- assign rest = chunk | remove_first: close -%}
+{%- assign parts = inner | split: '|' -%}
+{%- assign name = parts[0] | strip -%}
+{%- assign opt = parts[1] | strip -%}
+{%- assign ext = name | split: '.' | last | downcase -%}
+{%- if image_exts contains ext -%}
+{%- capture src %}{% include image-src.html name=name %}{% endcapture -%}
+{%- assign width = '' -%}{%- assign height = '' -%}{%- assign alt = '' -%}
+{%- if opt != '' -%}
+{%- assign w = opt | split: 'x' | first -%}{%- assign h = opt | split: 'x' | last -%}
+{%- assign w_num = w | plus: 0 | append: '' -%}{%- assign h_num = h | plus: 0 | append: '' -%}
+{%- if w_num == w and w_num != '0' -%}{%- assign width = w -%}{%- if opt contains 'x' and h_num == h -%}{%- assign height = h -%}{%- endif -%}{%- else -%}{%- assign alt = opt -%}{%- endif -%}
+{%- endif -%}
+<img src="{{ src | strip }}" alt="{{ alt | strip_html | escape }}"{% if width != '' %} width="{{ width }}"{% endif %}{% if height != '' %} height="{{ height }}"{% endif %} loading="lazy" decoding="async">{{ rest }}
+{%- else -%}{{ parts[1] | default: name }}{{ rest }}{%- endif -%}
+{%- endfor -%}{%- endcapture -%}
+
+{%- comment -%} Markdown images with relative paths {%- endcomment -%}
+{%- assign chunks = html | split: '<img src="' -%}
+{%- for chunk in chunks -%}{%- if forloop.first -%}{{ chunk }}{%- continue -%}{%- endif -%}
+{%- assign src = chunk | split: '"' | first -%}
+{%- assign first_char = src | slice: 0 -%}
+{%- if first_char == '/' or src contains '://' or src contains 'data:' -%}<img src="{{ chunk }}
+{%- else -%}{%- assign name = src | split: '/' | last -%}{%- capture resolved %}{% include image-src.html name=name %}{% endcapture -%}{%- assign resolved = resolved | strip -%}<img src="{{ chunk | replace_first: src, resolved }}
+{%- endif -%}
+{%- endfor -%}

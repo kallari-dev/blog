@@ -1,8 +1,9 @@
 ---
 title: A tiny generator for consistent finding templates
 description: A small Python script that turns a YAML file of findings into Markdown sections with the same structure every time.
-order: 4
-type: coding
+date: 2026-07-20
+category: coding
+tags: [python, tooling, reporting]
 status: active
 stack: Python · YAML
 featured: true
@@ -54,8 +55,8 @@ if __name__ == "__main__":
     main(sys.argv[1])
 ```
 
+> [!danger]
 > `yaml.safe_load` matters here: plain `yaml.load` can build arbitrary Python objects from the input file.
-{: .callout .critical}
 
 ## What's next
 

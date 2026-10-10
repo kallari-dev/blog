@@ -4,25 +4,34 @@ layout: default
 {% assign cat = site.data.categories[page.category] %}{% assign words = content | number_of_words %}{% assign minutes = words | divided_by: 200 | at_least: 1 %}
 <article class="entry wrap">
   <header class="entry-head vanish">
-    <p class="label meta">
-      <a class="more" href="{{ '/blog/' | relative_url }}?category={{ page.category }}"><b>{{ cat.single | default: page.category }}</b></a>
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
-      <span>{{ minutes }} min</span>
-    </p>
-    <h1>{{ page.title }}</h1>
-    {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
-    {% if page.tags.size > 0 %}
-    <ul class="badges" aria-label="Tags">
-      {% for tag in page.tags %}<li><a class="badge" href="{{ '/blog/' | relative_url }}?tag={{ tag | downcase | uri_escape }}">#{{ tag }}</a></li>{% endfor %}
-    </ul>
-    {% endif %}
+    <div class="entry-intro">
+      <p class="label kicker"><a class="more" href="{{ '/blog/' | relative_url }}?category={{ page.category }}"><b>{{ cat.single | default: page.category }}</b></a></p>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
+      {% if page.sample %}<p class="badges"><span class="badge sample">Sample entry · placeholder content</span></p>{% endif %}
+    </div>
+
+    <aside class="facts frame" aria-label="Post details">
+      <span class="label frame-label">Entry</span>
+      <dl class="dossier">
+        <div><dt class="label">Date</dt><dd><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time></dd></div>
+        <div><dt class="label">Read</dt><dd>{{ minutes }} min</dd></div>
+      </dl>
+      {% if page.tags.size > 0 %}
+      <ul class="badges" aria-label="Tags">
+        {% for tag in page.tags %}<li><a class="badge" href="{{ '/blog/' | relative_url }}?tag={{ tag | downcase | uri_escape }}">#{{ tag }}</a></li>{% endfor %}
+      </ul>
+      {% endif %}
+    </aside>
   </header>
+
+  {% if page.cover %}{% include cover.html src=page.cover class="entry-cover" eager=true %}{% endif %}
 
   <div class="entry-body vanish-2">
     <div class="prose">
-      {{ content }}
+      {% capture body %}{% include images.html html=content %}{% endcapture %}{% include callouts.html html=body %}
     </div>
-    {% if page.toc %}{% include toc.html html=content %}{% endif %}
+    {% unless page.toc == false %}{% include toc.html html=content %}{% endunless %}
   </div>
 
   {% if page.previous or page.next %}

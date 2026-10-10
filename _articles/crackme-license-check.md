@@ -1,9 +1,10 @@
 ---
 title: Reading a license check without running it
 description: A beginner reversing challenge solved by static analysis alone, and what it teaches about trusting client-side checks.
+date: 2026-09-12
 category: writeup
 tags: [reversing, ctf, static-analysis]
-toc: true
+sample: true
 ---
 
 This is a writeup of an introductory reversing challenge from a practice platform. The binary asks for a license key and prints either a flag or a refusal. The goal was to solve it without ever running it, to practice reading code instead of poking at it.
@@ -32,8 +33,8 @@ int check(const char *key) {
 }
 ```
 
+> [!note]
 > The whole "protection" is a checksum. Many keys pass it, and anyone holding the binary can read the rule.
-{: .callout .note}
 
 ## Why this matters outside CTFs
 

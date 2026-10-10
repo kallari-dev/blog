@@ -6,7 +6,7 @@ Recall, a blog and portfolio by Kallari, built with Jekyll and served by GitHub 
 
 | Path | What it holds |
 |---|---|
-| `_posts/` | Blog posts |
+| `_articles/` | Blog posts |
 | `_projects/` | Project overviews (engagements, coding, research) |
 | `_data/profile.yml` | Portfolio readout and skill tree |
 | `_data/categories.yml` | Blog categories |
@@ -18,54 +18,57 @@ Recall, a blog and portfolio by Kallari, built with Jekyll and served by GitHub 
 | `assets/fonts/` | Self-hosted fonts |
 | `assets/js/` | Blog and projects filter, code block bar |
 
-## Writing a post
+## Writing posts and projects
 
-Create `_posts/YYYY-MM-DD-slug.md`. The date must not be in the future, or the post won't publish.
+Posts and projects share the same properties, all editable from Obsidian's Properties panel:
 
 ```yaml
 ---
 title: Post title
 description: One or two sentences for cards and search results.
-category: writeup   # writeup | guide | extra
+date: 2026-10-03
+category: writeup     # posts: writeup | guide | extra · projects: engagement | coding | research
 tags: [web, python]
-toc: true           # optional: table of contents from the h2 headings
 ---
 ```
 
-Callouts are blockquotes with a class on the line below:
-
-```markdown
-> Something worth flagging.
-{: .callout .note}
-```
-
-Use `.note`, `.warning` or `.critical`.
-
-## Adding a project
-
-Create `_projects/slug.md`:
+Optional, only shown when present:
 
 ```yaml
----
-title: Project title
-description: One line for the card.
-order: 5                  # sort position
-type: engagement          # engagement | coding | research
-status: closed            # closed | active
-target_label: Web application   # optional, shown on the card cover
-method: Grey box          # optional (engagements)
-stack: Python · YAML      # optional (coding)
-duration: 2 weeks         # optional
-repo: https://github.com/kallari-dev/example   # optional
-featured: true            # show on the home and portfolio pages (first three by order)
-sample: false             # true shows a "Sample entry" badge
-findings:                 # optional, rendered with severity labels
-  - severity: high        # critical | high | medium | low | info
-    title: Short description of the finding
-outcome: >-
-  What changed as a result.
----
+toc: false            # hide the table of contents (on by default, built from ## headings)
+status: closed        # projects: closed | active
+method: Grey box      # projects: shown in the header and on the card
+stack: Python · YAML
+duration: 2 weeks
+repo: https://github.com/kallari-dev/example
+cover: example.webp   # featured image from assets/images/ (see below)
+featured: true        # projects: show on the home and portfolio pages (newest three)
+sample: true          # shows a "Sample entry" badge
 ```
+
+Everything else is plain Markdown in the body: use any headings and sections you like (findings, outcome, scope...).
+
+- Posts live in `_articles/slug.md` and are published at `/blog/slug/`, sorted newest first by `date`.
+- Projects live in `_projects/slug.md`, sorted newest first by `date`.
+- Images live in `assets/images/` (subfolders are fine). Reference them by file name and the site finds them, both Obsidian-style and Markdown-style:
+
+  ```markdown
+  ![[shot.png]]              plain
+  ![[shot.png|400]]          400px wide (400x300 sets both sides)
+  ![[shot.png|What it shows]]  alt text
+  ![What it shows](Assets/shot.png)   any relative path works, only the name is used
+  ```
+
+  Put an embed with `|` on its own line, otherwise the Markdown converter reads the `|` as a table. Embeds of other notes (`![[note]]`) show the note's name as plain text.
+- Featured image: set `cover` to an image name, plain (`cover: crackme.webp`) or as a link (`cover: "[[crackme.webp]]"`). On posts it shows between the header and the text, on projects it replaces the ASCII rings on the page and the card. Covers render in greyscale with a dot screen to match the site; landscape works best (cards crop to 5:2). Only images from this site load (the CSP blocks external URLs).
+- Callouts use Obsidian syntax. Note-like types render as notes, `warning`/`caution`/`important` as warnings, `danger`/`bug`/`error` as critical:
+
+  ```markdown
+  > [!warning] Optional title
+  > Something worth flagging.
+  ```
+
+- Don't repeat the title as a `# heading`: the page shows it from the property. Links to other notes (`[[note]]`) aren't converted, so link to published pages with normal Markdown links.
 
 Never name clients, employers, people or systems.
 

@@ -1,0 +1,6 @@
+{% comment %}
+  Renders a post or project cover from the `cover` property. Accepts a bare file name
+  (crackme.webp), an Obsidian link ([[crackme.webp]]) or a path; only the file name is
+  kept and resolved by image-src.html.
+  Usage: {% include cover.html src=page.cover class="entry-cover" eager=true %}
+{% endcomment %}{% assign file = include.src | remove: '[[' | remove: ']]' | split: '|' | first | split: '/' | last | strip %}{% capture src %}{% include image-src.html name=file %}{% endcapture %}<figure class="art {{ include.class }}"><img src="{{ src | strip }}" alt=""{% unless include.eager %} loading="lazy"{% endunless %} decoding="async"></figure>

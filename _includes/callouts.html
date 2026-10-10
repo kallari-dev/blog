@@ -1,0 +1,8 @@
+{% comment %}
+  Turns Obsidian callouts in rendered post HTML into styled blocks:
+    > [!warning] Optional title
+    > Body text
+  Obsidian's many types fold into three styles: note, warning, critical.
+  Usage: {% include callouts.html html=content %}
+{% endcomment %}{% capture nl %}
+{% endcapture %}{% assign marker = '<blockquote>' | append: nl | append: '  <p>[!' %}{% assign warning_types = 'warning,caution,attention,important' | split: ',' %}{% assign critical_types = 'danger,error,bug,failure,fail,missing,critical' | split: ',' %}{% assign parts = include.html | split: marker %}{% for part in parts %}{% if forloop.first %}{{ part }}{% continue %}{% endif %}{% assign raw = part | split: ']' | first %}{% assign kind = raw | downcase | strip %}{% assign style = 'note' %}{% if warning_types contains kind %}{% assign style = 'warning' %}{% elsif critical_types contains kind %}{% assign style = 'critical' %}{% endif %}{% assign rest = part | remove_first: raw | remove_first: ']' %}{% assign fold = rest | slice: 0 %}{% if fold == '-' or fold == '+' %}{% assign rest = rest | remove_first: fold %}{% endif %}{% assign title = rest | split: nl | first | split: '</p>' | first %}{% if title != '' %}{% assign rest = rest | remove_first: title %}{% endif %}{% assign title = title | strip_html | strip %}{% capture block %}<blockquote class="callout {{ style }}"{% if title != '' %} data-title="{{ title }}"{% endif %}>{{ nl }}  <p>{{ rest }}{% endcapture %}{{ block | replace: '<p></p>', '' }}{% endfor %}

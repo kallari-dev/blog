@@ -1,0 +1,9 @@
+{%- comment -%}
+  Outputs the site URL for an image file name: the published file with that name
+  wherever it sits under the site, else assets/images/<name>.
+  Usage: {% capture src %}{% include image-src.html name="shot.png" %}{% endcapture %}
+{%- endcomment -%}
+{%- assign name = include.name | strip | replace: '%20', ' ' -%}
+{%- assign hit = site.static_files | where: 'name', name | first -%}
+{%- if hit -%}{%- assign path = hit.path -%}{%- else -%}{%- assign path = '/assets/images/' | append: name -%}{%- endif -%}
+{{- path | relative_url | replace: ' ', '%20' -}}

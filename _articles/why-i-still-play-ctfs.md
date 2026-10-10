@@ -1,8 +1,10 @@
 ---
 title: Why I still play CTFs
 description: Competitions are not real engagements, and that is exactly why they are worth the time.
+date: 2026-10-03
 category: extra
 tags: [ctf, learning]
+sample: true
 ---
 
 Every so often someone points out that capture-the-flag challenges look nothing like real work. They're right, and that is the point.

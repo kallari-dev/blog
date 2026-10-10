@@ -53,9 +53,9 @@ layout: default
       <h2 class="hack glitch" id="projects-title">Selected projects</h2>
       <a class="more" href="{{ '/projects/' | relative_url }}">All projects &rarr;</a>
     </div>
-    {% assign featured = site.projects | where: 'featured', true | sort: 'order' %}
+    {% assign featured = site.projects | where: 'featured', true | sort: 'date' | reverse %}
     <ul class="grid cards">
-      {% for p in featured limit: 3 %}{% include project-card.html project=p %}{% endfor %}
+      {% for p in featured limit: 3 %}{% include project-card.html project=p index=forloop.index %}{% endfor %}
     </ul>
   </section>
 

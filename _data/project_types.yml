@@ -1,4 +1,4 @@
-# Project types. The key goes in a project's front matter as `type:`.
+# Project types. The key goes in a project's front matter as `category:`.
 engagement:
   label: Engagements
   single: Engagement

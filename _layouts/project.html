@@ -1,47 +1,41 @@
 ---
 layout: default
 ---
-{% assign slot = site.data.art[page.cover] %}{% assign type = site.data.project_types[page.type] %}
+{% assign type = site.data.project_types[page.category] %}
 <article class="entry wrap">
   <header class="entry-head vanish">
-    <p class="label">
-      <a class="more" href="{{ '/projects/' | relative_url }}?category={{ page.type }}"><b>{{ type.single | default: page.type }}</b></a>
-      {% if page.status %}<span class="status{% if page.status == 'closed' %} closed{% endif %}">{{ page.status }}</span>{% endif %}
-    </p>
-    <h1>{{ page.title }}</h1>
-    {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
-    {% if page.sample %}<p class="badges"><span class="badge sample">Sample entry · placeholder content</span></p>{% endif %}
+    <div class="entry-intro">
+      <p class="label kicker"><a class="more" href="{{ '/projects/' | relative_url }}?category={{ page.category }}"><b>{{ type.single | default: page.category }}</b></a></p>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
+      {% if page.sample %}<p class="badges"><span class="badge sample">Sample entry · placeholder content</span></p>{% endif %}
+    </div>
 
-    <dl class="dossier">
-      {% if page.target_label %}<div><dt class="label">Target</dt><dd>{{ page.target_label }}</dd></div>{% endif %}
-      {% if page.method %}<div><dt class="label">Method</dt><dd>{{ page.method }}</dd></div>{% endif %}
-      {% if page.stack %}<div><dt class="label">Stack</dt><dd>{{ page.stack }}</dd></div>{% endif %}
-      {% if page.duration %}<div><dt class="label">Duration</dt><dd>{{ page.duration }}</dd></div>{% endif %}
-      {% if page.findings %}<div><dt class="label">Findings</dt><dd>{{ page.findings.size }}</dd></div>{% endif %}
-      {% if page.repo %}<div><dt class="label">Repo</dt><dd><a href="{{ page.repo }}">{{ page.repo | remove: 'https://' }}</a></dd></div>{% endif %}
-    </dl>
+    <aside class="facts frame" aria-label="Project details">
+      <span class="label frame-label">Case file</span>
+      <dl class="dossier">
+        {% if page.status %}<div><dt class="label">Status</dt><dd><span class="status{% if page.status == 'closed' %} closed{% endif %}">{{ page.status }}</span></dd></div>{% endif %}
+        {% if page.date %}<div><dt class="label">Date</dt><dd><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m" }}</time></dd></div>{% endif %}
+        {% if page.method %}<div><dt class="label">Method</dt><dd>{{ page.method }}</dd></div>{% endif %}
+        {% if page.stack %}<div><dt class="label">Stack</dt><dd>{{ page.stack }}</dd></div>{% endif %}
+        {% if page.duration %}<div><dt class="label">Duration</dt><dd>{{ page.duration }}</dd></div>{% endif %}
+        {% if page.repo %}<div><dt class="label">Repo</dt><dd><a href="{{ page.repo }}">{{ page.repo | remove: 'https://' | remove: 'github.com/' }}</a></dd></div>{% endif %}
+      </dl>
+      {% if page.tags.size > 0 %}
+      <ul class="badges" aria-label="Tags">
+        {% for tag in page.tags %}<li><span class="badge">#{{ tag }}</span></li>{% endfor %}
+      </ul>
+      {% endif %}
+    </aside>
   </header>
 
-  {% if slot and slot.src %}{% include art.html key=page.cover class="project-cover" eager=true %}{% else %}<div class="project-cover ring-strip" aria-hidden="true">{% include ascii/rings.html %}</div>{% endif %}
+  {% if page.cover %}{% include cover.html src=page.cover class="project-cover" eager=true %}{% else %}<div class="project-cover ring-strip" aria-hidden="true">{% include ascii/rings.html %}</div>{% endif %}
 
   <div class="entry-body vanish-2">
     <div class="prose">
-      {{ content }}
-
-      {% if page.findings %}
-      <h2 id="findings">Findings</h2>
-      <ul class="findings">
-        {% for f in page.findings %}
-        <li><span class="badge sev sev-{{ f.severity }}">{{ f.severity }}</span><span>{{ f.title }}</span></li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-
-      {% if page.outcome %}
-      <h2 id="outcome">Outcome</h2>
-      {{ page.outcome | markdownify }}
-      {% endif %}
+      {% capture body %}{% include images.html html=content %}{% endcapture %}{% include callouts.html html=body %}
     </div>
+    {% unless page.toc == false %}{% include toc.html html=content %}{% endunless %}
   </div>
 
   <nav class="pager" aria-label="More projects">

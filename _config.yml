@@ -14,7 +14,6 @@ github_url: https://github.com/kallari-dev
 # GitHub Pages only runs whitelisted plugins
 plugins:
   - jekyll-seo-tag
-  - jekyll-feed
   - jekyll-sitemap
 
 markdown: kramdown
@@ -23,9 +22,12 @@ kramdown:
   hard_wrap: false
   syntax_highlighter: rouge
 
-permalink: /blog/:title/
+permalink: pretty
 
 collections:
+  articles:
+    output: true
+    permalink: /blog/:name/
   projects:
     output: true
     permalink: /projects/:name/
@@ -33,7 +35,7 @@ collections:
 defaults:
   - scope:
       path: ""
-      type: posts
+      type: articles
     values:
       layout: post
   - scope:
@@ -46,9 +48,6 @@ defaults:
       type: pages
     values:
       layout: page
-
-feed:
-  path: feed.xml
 
 exclude:
   - README.md

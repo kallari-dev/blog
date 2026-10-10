@@ -64,13 +64,6 @@ a.badge:hover { color: var(--text); border-color: var(--violet); }
 
 .badge.sample { border-style: dashed; }
 
-/* severity labels: the only place crimson appears */
-.sev-critical { background: var(--crimson); border-color: var(--crimson); color: var(--void); }
-.sev-high { border-color: var(--crimson); color: var(--crimson); }
-.sev-medium { border-color: var(--copper); color: var(--copper); }
-.sev-low { border-color: var(--line-strong); color: var(--muted); }
-.sev-info { border-color: var(--line); color: var(--faint); }
-
 /* post list */
 .posts { margin: 0; padding: 0; list-style: none; }
 .posts.ruled { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -131,7 +124,7 @@ a.badge:hover { color: var(--text); border-color: var(--violet); }
 .project-card .cover {
   position: relative;
   display: block;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 5 / 2;
   overflow: hidden;
   border-bottom: 1px solid var(--line);
   background: var(--void);

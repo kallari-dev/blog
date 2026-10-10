@@ -5,8 +5,7 @@ _site/
 .bundle/
 vendor/
 .DS_Store
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
+.obsidian/
 Gemfile.lock
 .claude/
 _references/

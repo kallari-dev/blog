@@ -1,14 +1,14 @@
-{% assign p = include.project %}{% assign slot = site.data.art[p.cover] %}{% assign type = site.data.project_types[p.type] %}
-<li class="project-item" data-category="{{ p.type }}" data-title="{{ p.title | downcase | escape }}">
+{% assign p = include.project %}{% assign type = site.data.project_types[p.category] %}
+<li class="project-item" data-category="{{ p.category }}" data-title="{{ p.title | downcase | escape }}">
   <a class="project-card" href="{{ p.url | relative_url }}">
-    {% if slot and slot.src %}
-    <span class="cover">{% include art.html key=p.cover %}</span>
+    {% if p.cover %}
+    <span class="cover">{% include cover.html src=p.cover %}</span>
     {% else %}
-    <div class="cover ring-cover" style="--o: {{ p.order | default: 0 }}" aria-hidden="true">{% include ascii/rings.html %}<span class="cover-tag label">{{ p.target_label | default: type.single }}</span></div>
+    <div class="cover ring-cover" style="--o: {{ include.index | default: 0 }}" aria-hidden="true">{% include ascii/rings.html %}<span class="cover-tag label">{{ type.single | default: p.category }}</span></div>
     {% endif %}
     <div class="project-body">
       <span class="card-meta label">
-        <span>{{ type.single | default: p.type }}</span>
+        <span>{{ type.single | default: p.category }}</span>
         {% if p.status %}<span class="status{% if p.status == 'closed' %} closed{% endif %}">{{ p.status }}</span>{% endif %}
       </span>
       <h3>{{ p.title }}</h3>

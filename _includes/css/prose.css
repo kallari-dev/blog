@@ -2,17 +2,28 @@
 .entry { padding: clamp(48px, 8vw, 96px) 0 0; }
 
 .entry-head {
-  max-width: 860px;
+  display: grid;
+  grid-template-columns: minmax(0, var(--read)) minmax(0, 1fr);
+  gap: 32px 56px;
+  align-items: start;
   margin-bottom: 40px;
   padding-bottom: 32px;
   border-bottom: 1px solid var(--line);
 }
 
-.entry-head .label { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-bottom: 18px; }
-.entry-head .label b { font-weight: 400; color: var(--text); }
-.entry-head .meta > * + *::before { content: "·"; margin-right: 12px; color: var(--faint); }
+.entry-head .kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 0 0 18px; }
+.entry-head .kicker b { font-weight: 400; color: var(--text); }
 .entry-head .lede { margin-top: 16px; }
-.entry-head .badges { margin-top: 22px; }
+.entry-intro .badges { margin-top: 22px; }
+
+/* details panel beside the title, lined up with the contents rail below */
+.facts { margin-top: 6px; padding-bottom: 18px; }
+.facts .dossier { max-width: none; margin: 0; }
+.facts .badges { margin-top: 16px; }
+
+@media (max-width: 960px) {
+  .entry-head { grid-template-columns: minmax(0, 1fr); }
+}
 
 .entry-body {
   display: grid;
@@ -144,7 +155,7 @@
 .highlight .gd { color: var(--crimson); }
 .highlight .gi { color: var(--gold); }
 
-/* blockquotes and callouts (kramdown: add {: .callout .warning} under the quote) */
+/* blockquotes and callouts (Obsidian syntax, converted by _includes/callouts.html) */
 .prose blockquote {
   margin-inline: 0;
   padding: 4px 0 4px 20px;
@@ -181,6 +192,11 @@
 
 .prose blockquote.critical { border-left-color: var(--crimson); }
 .prose blockquote.critical::before { content: "[x] Critical"; color: var(--crimson); }
+
+/* a custom title replaces the default label: > [!warning] Title */
+.prose blockquote.callout[data-title]::before { content: "[i] " attr(data-title); }
+.prose blockquote.warning[data-title]::before { content: "[!] " attr(data-title); }
+.prose blockquote.critical[data-title]::before { content: "[x] " attr(data-title); }
 
 /* previous and next */
 .pager {

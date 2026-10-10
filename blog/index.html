@@ -5,6 +5,7 @@ description: Writeups, guides, projects and the occasional extra.
 scripts:
   - /assets/js/filter.js
 ---
+{% assign articles = site.articles | sort: 'date' | reverse %}
 <div class="wrap">
   <header class="page-head compact vanish">
     <span class="label">The blog</span>
@@ -35,7 +36,7 @@ scripts:
         </div>
       </div>
 
-      {% assign tags = site.posts | map: 'tags' | join: ',' | downcase | split: ',' | uniq | sort %}
+      {% assign tags = articles | map: 'tags' | join: ',' | downcase | split: ',' | uniq | sort %}
       {% if tags.size > 0 %}
       <div class="filter-row">
         <span class="filter-key" aria-hidden="true">--tag</span>
@@ -49,10 +50,10 @@ scripts:
     </div>
 
     <div class="results">
-      <p class="count label" id="count" data-noun="post" aria-live="polite">{{ site.posts.size }} {% if site.posts.size == 1 %}post{% else %}posts{% endif %} found</p>
+      <p class="count label" id="count" data-noun="post" aria-live="polite">{{ articles.size }} {% if articles.size == 1 %}post{% else %}posts{% endif %} found</p>
 
       <ul class="posts ruled" id="filter-list">
-        {% for post in site.posts %}
+        {% for post in articles %}
           {% include post-card.html post=post %}
         {% endfor %}
       </ul>

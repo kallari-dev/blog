@@ -1,9 +1,10 @@
 ---
 title: Writing findings that actually get fixed
 description: A practical structure for vulnerability report findings, so the people who read them can act on them.
+date: 2026-09-20
 category: guide
 tags: [reporting, methodology]
-toc: true
+sample: true
 ---
 
 A penetration test is only as useful as its report. The finding that gets fixed is the one a busy developer can understand in two minutes and act on in an afternoon.
@@ -27,8 +28,8 @@ Keep each finding to a single root cause. If the same missing check appears on t
 
 A label alone invites argument. A label with its reasoning invites a fix.
 
+> [!warning]
 > State the impact in business terms and the likelihood in technical terms. "Any logged-in user can read other customers' invoices" lands better than a bare score.
-{: .callout .warning}
 
 ## Remediation should be specific
 

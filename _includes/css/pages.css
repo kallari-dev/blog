@@ -36,20 +36,7 @@
 .dossier dd { order: 2; margin: 0; text-align: right; }
 
 .project-cover { margin: 40px 0 0; border: 1px solid var(--line); }
-
-.prose .findings { display: grid; gap: 10px; padding: 0; list-style: none; }
-
-.findings li {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 14px;
-  align-items: baseline;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  background: var(--veil);
-}
-
-.findings .badge { justify-content: center; min-width: 76px; }
+.entry-cover { margin: 0 0 40px; border: 1px solid var(--line); }
 
 /* 404 */
 .vanished { padding: clamp(80px, 14vw, 160px) 0 0; text-align: center; }
