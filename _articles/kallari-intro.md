@@ -5,12 +5,9 @@ date: 2026-10-10
 category: extra
 tags:
   - commentary
-cover:
+cover: shadow_walk.png
 published: true
 ---
 
 This is the first post, so welcome to my website. I'm Kallari, a cybersecurity practitioner. I enjoy sharing my experiences in the cyber world and document my adventures. 
 Feel free to navigate this space, and have a nice stay!
-
-
-![[shadow_walk.png]]
