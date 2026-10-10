@@ -3,7 +3,7 @@ layout: default
 ---
 {% assign cat = site.data.categories[page.category] %}{% assign words = content | number_of_words %}{% assign minutes = words | divided_by: 200 | at_least: 1 %}
 <article class="entry wrap">
-  <header class="entry-head vanish">
+  <header class="entry-head{% if page.cover %} has-cover{% endif %} vanish">
     <div class="entry-intro">
       <p class="label kicker"><a class="more" href="{{ '/blog/' | relative_url }}?category={{ page.category }}"><b>{{ cat.single | default: page.category }}</b></a></p>
       <h1>{{ page.title }}</h1>

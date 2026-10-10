@@ -35,7 +35,7 @@
 .dossier dt { order: 0; flex: none; }
 .dossier dd { order: 2; margin: 0; text-align: right; }
 
-.project-cover { margin: 40px 0 0; border: 1px solid var(--line); }
+.project-cover { margin: 0 0 40px; border: 1px solid var(--line); }
 .entry-cover { margin: 0 0 40px; border: 1px solid var(--line); }
 
 /* 404 */

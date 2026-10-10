@@ -11,6 +11,9 @@
   border-bottom: 1px solid var(--line);
 }
 
+/* the cover image below takes the divider's place */
+.entry-head.has-cover { padding-bottom: 0; border-bottom: 0; }
+
 .entry-head .kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 0 0 18px; }
 .entry-head .kicker b { font-weight: 400; color: var(--text); }
 .entry-head .lede { margin-top: 16px; }
@@ -219,6 +222,15 @@
   line-height: 1.4;
 }
 
+.pager .up { text-align: center; }
+
+/* older · index · newer keep their columns even when one end is missing */
+@media (min-width: 720px) {
+  .pager-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pager-3 .prev { grid-column: 1; }
+  .pager-3 .up { grid-column: 2; }
+  .pager-3 .next { grid-column: 3; }
+}
 .pager .next { text-align: right; }
 
 @media (hover: hover) {
