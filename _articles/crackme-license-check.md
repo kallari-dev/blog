@@ -5,6 +5,7 @@ date: 2026-09-12
 category: writeup
 tags: [reversing, ctf, static-analysis]
 sample: true
+published: false
 ---
 
 This is a writeup of an introductory reversing challenge from a practice platform. The binary asks for a license key and prints either a flag or a refusal. The goal was to solve it without ever running it, to practice reading code instead of poking at it.

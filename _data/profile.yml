@@ -5,7 +5,7 @@
 operator:
   class: Offensive security
   status: Active
-  sample_levels: true
+  sample_levels: false
 
 tree:
   - branch: Penetration testing
@@ -16,8 +16,7 @@ tree:
       - name: Networks
       - name: Cloud
       - name: Active Directory
-      - name: Pentester exam
-        state: progress
+      - name: Comptia Pentest+ Certification
   - branch: Capture the flag
     level: 6
     nodes:

@@ -5,6 +5,7 @@ date: 2026-09-20
 category: guide
 tags: [reporting, methodology]
 sample: true
+published: false
 ---
 
 A penetration test is only as useful as its report. The finding that gets fixed is the one a busy developer can understand in two minutes and act on in an afternoon.

@@ -5,6 +5,7 @@ date: 2026-10-03
 category: extra
 tags: [ctf, learning]
 sample: true
+published: false
 ---
 
 Every so often someone points out that capture-the-flag challenges look nothing like real work. They're right, and that is the point.

@@ -9,6 +9,7 @@ method: Grey box
 duration: 2 weeks
 featured: true
 sample: true
+published: false
 ---
 
 ## Scope

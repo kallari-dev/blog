@@ -8,6 +8,7 @@ status: active
 stack: Python · YAML
 featured: true
 sample: true
+published: false
 ---
 
 Copying the previous report and editing it is how inconsistencies creep in. This project keeps findings as data and renders them the same way every time.

@@ -9,6 +9,7 @@ method: Assumed breach
 duration: 1 week
 featured: true
 sample: true
+published: false
 ---
 
 ## Scope
