@@ -1,16 +1,30 @@
 ---
 title: Customer portal for a SaaS platform
 description: Grey-box test of a multi-tenant web application and its REST API.
-date: 2026-09-28
+date: 2026-10-18
 category: engagement
-tags: [web, api]
-status: closed
+tags:
+  - web
+  - api
+status: active
 method: Grey box
 duration: 2 weeks
-featured: true
+featured: false
 sample: true
 published: false
+stack:
+repo:
+cover:
 ---
+
+## Scope
+
+## Approach
+
+## Findings
+
+## Outcome
+
 
 ## Scope
 

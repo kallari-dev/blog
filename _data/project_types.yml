@@ -8,3 +8,6 @@ coding:
 research:
   label: Research
   single: Research
+certification:
+  label: Certification
+  single: Certification
