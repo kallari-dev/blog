@@ -61,10 +61,20 @@
 .prose > * + * { margin-top: 1.1em; }
 .prose p, .prose ul, .prose ol, .prose pre, .prose table, .prose blockquote { margin-bottom: 0; }
 
-.prose h2 { margin-top: 2.2em; font-size: 22px; scroll-margin-top: 96px; }
+.prose h2 { margin-top: 2.2em; font-size: 22px; color: var(--copper); scroll-margin-top: 96px; }
 .prose h3 { margin-top: 1.8em; font-size: 16.5px; color: var(--violet); scroll-margin-top: 96px; }
-.prose h2::before { content: "## "; color: var(--faint); }
-.prose h3::before { content: "### "; color: var(--faint); }
+
+/* section marks: a violet block before h2, a faint chevron before h3 */
+.prose h2::before {
+  content: "";
+  display: inline-block;
+  width: 0.4em;
+  height: 0.8em;
+  margin-right: 0.55em;
+  background: var(--violet);
+  vertical-align: -0.04em;
+}
+.prose h3::before { content: "> "; color: var(--faint); }
 
 .prose ul { list-style: square; }
 .prose ul, .prose ol { padding-left: 1.3em; }
