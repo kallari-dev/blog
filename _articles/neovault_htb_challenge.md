@@ -62,7 +62,7 @@ After testing out the available endpoints, we gather the following relevant info
 
 Request: 
 
-```http request
+```http
 POST /api/v2/transactions/deposit HTTP/1.1
 Host: 154.57.164.78:40511
 <..>
