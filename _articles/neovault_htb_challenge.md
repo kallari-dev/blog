@@ -8,7 +8,7 @@ tags:
   - ctf
   - htb
   - easy
-cover: ctf_banner
+cover: ctf_banner.png
 published: true
 ---
 
